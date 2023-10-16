@@ -1,0 +1,76 @@
+
+.content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		width: 100%;
+		height: 100%;
+}
+.content::before {
+	  content: '';
+	  background-image: url(../../static/backgroud.jpg); /* 替换成你的背景图片路径 */
+	  background-size: cover; /* 根据容器大小调整背景图片尺寸 */
+	  filter: blur(20px); /* 调整模糊程度，值可以根据需求调整 */
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  z-index: -1; /* 确保 ::before 在内容之后 */
+}
+.swiper {
+		width: 100%;
+		height: 12.5rem;
+		border-radius: 0 0 0.9375rem 0.9375rem;
+		overflow: hidden;
+}
+.swiper-item {
+		width: 100%;
+		/* line-height: 400rpx; */
+		height: 100%;
+		text-align: center;
+		background-color: antiquewhite;
+}
+.logo {
+		height: 6.25rem;
+		width: 6.25rem;
+		margin-top: 6.25rem;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 1.5625rem;
+}
+.text-area {
+		display: flex;
+		justify-content: center;
+}
+.title {
+		font-size: 1.125rem;
+		color: #8f8f94;
+}
+.holder1 {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		width: 100%;
+		height: 25%;
+}
+.pic {
+		width: 40%;
+		height: 40vw;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 0.9375rem;
+		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+		box-sizing: border-box;
+}
+.tag_holder {
+		background: white;
+		opacity: 0.75;
+		border-radius: 0.9375rem;
+		width: 4.6875rem;
+		height: 1.5625rem;
+		position: relative;
+		top: 1.5625rem;
+}
