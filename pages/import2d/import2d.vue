@@ -10,10 +10,15 @@
 </template>
 
 <script>
+	// 以下路径需根据项目实际情况填写
+	import {
+		base64ToPath
+	} from '/js_sdk/mmmm-image-tools/index.js'
 	export default {
 		data() {
 			return {
-				tempFilePaths: []
+				tempFilePaths: [],
+				res_image_base64:{}
 			}
 		},
 		methods: {
@@ -31,13 +36,36 @@
 				});
 			},
 			uploadImage: function(tempFilePaths) {
+				var self=this
+				uni.showLoading({
+					title: "图片上传中"
+				})
 				uni.uploadFile({
-					url: 'http://127.0.0.1:5000/upload', //仅为示例，非真实的接口地址
+					url: 'http://10.202.220.232:5000/upload', //仅为示例，非真实的接口地址
 					filePath: tempFilePaths[0],
 					name: 'file',
 					formData: {},
 					success: (uploadFileRes) => {
-						console.log(uploadFileRes.data);
+						// console.log(uploadFileRes.data.image)
+						self.res_image_base64 = uploadFileRes.data
+						uni.showLoading({
+							title: '预览加载中'
+						});
+						base64ToPath(self.res_image_base64)
+							.then(path => {
+								uni.hideLoading()
+								console.log(path)
+								var urls = []
+								urls.push(path)
+								uni.previewImage({
+									urls: urls,
+									indicator: "none",
+
+								})
+							})
+							.catch(error => {
+								console.error(error)
+							})
 					}
 				});
 			}
