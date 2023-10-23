@@ -5,7 +5,7 @@
 				<text style="color: brown;font-size: 45rpx">漫转2D</text>
 			</view>
 		</view>
-		<view class="button">＋ 导入</view>
+		<view class="button" @tap="chooseImage">＋ 导入</view>
 	</view>
 </template>
 
@@ -13,11 +13,34 @@
 	export default {
 		data() {
 			return {
-				
+				tempFilePaths: []
 			}
 		},
 		methods: {
-			
+			chooseImage: function() {
+				var self = this;
+				uni.chooseImage({
+					count: 1, //默认9
+					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album', 'camera'], //从相册选择
+					success: function(res) {
+						console.log(res.tempFilePaths[0])
+						// self.tempFilePaths = res.tempFilePaths
+						self.uploadImage(res.tempFilePaths)
+					}
+				});
+			},
+			uploadImage: function(tempFilePaths) {
+				uni.uploadFile({
+					url: 'http://127.0.0.1:5000/upload', //仅为示例，非真实的接口地址
+					filePath: tempFilePaths[0],
+					name: 'file',
+					formData: {},
+					success: (uploadFileRes) => {
+						console.log(uploadFileRes.data);
+					}
+				});
+			}
 		}
 	}
 </script>
@@ -31,18 +54,24 @@
 		width: 100%;
 		height: 100%;
 	}
+
 	.content::before {
-	  content: '';
-	  background-image: url(/static/backgroud.jpg); /* 替换成你的背景图片路径 */
-	  background-size: cover; /* 根据容器大小调整背景图片尺寸 */
-	  filter: blur(20px); /* 调整模糊程度，值可以根据需求调整 */
-	  position: absolute;
-	  top: 0;
-	  left: 0;
-	  width: 100%;
-	  height: 100%;
-	  z-index: -1; /* 确保 ::before 在内容之后 */
+		content: '';
+		background-image: url(/static/backgroud.jpg);
+		/* 替换成你的背景图片路径 */
+		background-size: cover;
+		/* 根据容器大小调整背景图片尺寸 */
+		filter: blur(20px);
+		/* 调整模糊程度，值可以根据需求调整 */
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		/* 确保 ::before 在内容之后 */
 	}
+
 	.pic {
 		width: 80%;
 		height: 80vw;
@@ -62,11 +91,12 @@
 		position: relative;
 		top: 50rpx;
 	}
-	.button{
+
+	.button {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background:rgb(164, 126, 121);
+		background: rgb(164, 126, 121);
 		width: 80%;
 		height: 20%;
 		border-radius: 100rpx;
