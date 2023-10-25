@@ -2,38 +2,58 @@
 	<view class="content">
 		<swiper class="swiper" circular :autoplay="true">
 			<swiper-item>
-				<image src="/static/swiper1.png" class="swiper-item" mode="aspectFill"></image>
-			</swiper-item>
-			<swiper-item>
-				<image src="/static/swiper2.jpg" class="swiper-item" mode="aspectFill"></image>
+				<image src="/static/swiper1.jpg" class="swiper-item" mode="aspectFill"></image>
 			</swiper-item>
 
 		</swiper>
 		<view style="height: 5%;"></view>
 		<view class="holder1">
-			<view @tap="switchPage" id="pic1" class="pic"
-				style="background: url(/static/pic1.jpg);background-size: cover;">
+
+			<view class="holder2">
+				<view @tap="switchPage" id="pic1" class="pic"
+					style="background: url(/static/pic1.jpg);background-size: cover;">
+
+
+				</view>
 				<view class="flex_center tag_holder">
 					<text style="color: brown;">漫转2D</text>
 				</view>
-
 			</view>
-			<view @tap="switchPage" id="pic2" class="pic"
-				style="background: url(/static/pic2.jpg);background-size: cover;">
+			<view class="holder2">
+				<view @tap="switchPage" id="pic2" class="pic"
+					style="background: url(/static/pic2.jpg);background-size: cover;">
+
+
+				</view>
 				<view class="flex_center tag_holder">
 					<text style="color: brown;">漫转3D</text>
 				</view>
-
 			</view>
 		</view>
 		<view class="holder1">
-			<view @tap="switchPage" id="pic3" class="pic"
-				style="background: url(/static/pic1.jpg);background-size: cover;">
-				<view class="flex_center tag_holder">
-					<text style="color: brown;">模糊变清晰</text>
-				</view>
+			<view class="holder2">
+				<view @tap="switchPage" id="pic3" class="pic"
+					style="background: url(/static/pic2.jpg);background-size: cover;">
 
+
+				</view>
+				<view class="flex_center tag_holder">
+					<text style="color: brown;">焕新</text>
+				</view>
 			</view>
+			<view class="holder2">
+				<view @tap="switchPage" id="pic3" class="pic"
+					style="background: url(/static/pic2.jpg);background-size: cover;">
+
+
+				</view>
+				<view class="flex_center tag_holder">
+					<text style="color: brown;">焕新</text>
+				</view>
+			</view>
+		</view>
+		<view class="flex_center" style="width: 100%;height: 100px;background-color: yellow;">
+			<view style="height: 15vw;width: 15vw;background-color: black;border-radius: 50%;"></view>
 		</view>
 	</view>
 </template>
@@ -75,36 +95,35 @@
 
 <style>
 	.content {
+		padding: 2%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: flex-start;
 		width: 100%;
 		height: 100%;
+		box-sizing: border-box;
 	}
 
-	.content::before {
+	/* 	.content::before {
 		content: '';
 		background-image: url(/static/backgroud.jpg);
-		/* 替换成你的背景图片路径 */
 		background-size: cover;
-		/* 根据容器大小调整背景图片尺寸 */
 		filter: blur(20px);
-		/* 调整模糊程度，值可以根据需求调整 */
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
 		z-index: -1;
-		/* 确保 ::before 在内容之后 */
-	}
+	} */
 
 	.swiper {
 		width: 100%;
 		height: 30%;
 		border-radius: 0 0 30rpx 30rpx;
 		overflow: hidden;
+		box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
 	}
 
 	.swiper-item {
@@ -124,9 +143,20 @@
 
 	}
 
+	.holder2 {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+
+		width: 40vw;
+		height: 50vw;
+
+	}
+
 	.pic {
-		width: 42%;
-		height: 42vw;
+		width: 40vw;
+		height: 40vw;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -140,7 +170,5 @@
 		border-radius: 30rpx;
 		width: 150rpx;
 		height: 50rpx;
-		position: relative;
-		top: 50rpx;
 	}
 </style>
