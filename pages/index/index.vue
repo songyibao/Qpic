@@ -11,15 +11,26 @@
 		</swiper>
 		<view style="height: 5%;"></view>
 		<view class="holder1">
-			<view @tap="switchPage" id="pic1" class="pic" style="background: url(/static/pic1.jpg);background-size: cover;">
+			<view @tap="switchPage" id="pic1" class="pic"
+				style="background: url(/static/pic1.jpg);background-size: cover;">
 				<view class="flex_center tag_holder">
 					<text style="color: brown;">漫转2D</text>
 				</view>
 
 			</view>
-			<view @tap="switchPage" id="pic2" class="pic" style="background: url(/static/pic2.jpg);background-size: cover;">
+			<view @tap="switchPage" id="pic2" class="pic"
+				style="background: url(/static/pic2.jpg);background-size: cover;">
 				<view class="flex_center tag_holder">
 					<text style="color: brown;">漫转3D</text>
+				</view>
+
+			</view>
+		</view>
+		<view class="holder1">
+			<view @tap="switchPage" id="pic3" class="pic"
+				style="background: url(/static/pic1.jpg);background-size: cover;">
+				<view class="flex_center tag_holder">
+					<text style="color: brown;">模糊变清晰</text>
 				</view>
 
 			</view>
@@ -38,18 +49,22 @@
 
 		},
 		methods: {
-			switchPage:function(e){
-				switch(e.currentTarget.id){
+			switchPage: function(e) {
+				switch (e.currentTarget.id) {
 					case "pic1":
 						uni.navigateTo({
-							url:"/pages/import2d/import2d"
+							url: "/pages/import2d/import2d"
 						})
 						break;
 					case "pic2":
 						uni.navigateTo({
-							url:"/pages/import3d/import3d"
+							url: "/pages/import3d/import3d"
 						})
 						break;
+					case "pic3":
+						uni.navigateTo({
+							url: "/pages/importSR/importSR"
+						})
 					default:
 						break;
 				}
@@ -59,7 +74,6 @@
 </script>
 
 <style>
-
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -68,18 +82,24 @@
 		width: 100%;
 		height: 100%;
 	}
+
 	.content::before {
-	  content: '';
-	  background-image: url(/static/backgroud.jpg); /* 替换成你的背景图片路径 */
-	  background-size: cover; /* 根据容器大小调整背景图片尺寸 */
-	  filter: blur(20px); /* 调整模糊程度，值可以根据需求调整 */
-	  position: absolute;
-	  top: 0;
-	  left: 0;
-	  width: 100%;
-	  height: 100%;
-	  z-index: -1; /* 确保 ::before 在内容之后 */
+		content: '';
+		background-image: url(/static/backgroud.jpg);
+		/* 替换成你的背景图片路径 */
+		background-size: cover;
+		/* 根据容器大小调整背景图片尺寸 */
+		filter: blur(20px);
+		/* 调整模糊程度，值可以根据需求调整 */
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		/* 确保 ::before 在内容之后 */
 	}
+
 	.swiper {
 		width: 100%;
 		height: 30%;

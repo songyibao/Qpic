@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="pic" style="background: url(/static/pic1.jpg);background-size: cover;">
 			<view class="flex_center tag_holder">
-				<text style="color: brown;font-size: 45rpx">漫转2D</text>
+				<text style="color: brown;font-size: 45rpx">模糊变清晰</text>
 			</view>
 		</view>
 		<view class="button" @tap="chooseImage">＋ 导入</view>
@@ -15,7 +15,7 @@
 		base64ToPath
 	} from '/js_sdk/mmmm-image-tools/index.js'
 	import {
-		pic2dUrl as url
+		superResolutionUrl as url
 	} from '/config.js'
 	export default {
 		data() {
