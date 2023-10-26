@@ -1,11 +1,9 @@
 <template>
 	<view class="content">
-		<swiper class="swiper" circular :autoplay="true">
-			<swiper-item>
+		<view class="swiper">
 				<image src="/static/swiper1.jpg" class="swiper-item" mode="aspectFill"></image>
-			</swiper-item>
 
-		</swiper>
+		</view>
 		<view style="height: 5%;"></view>
 		<view class="holder1">
 
@@ -42,7 +40,7 @@
 				</view>
 			</view>
 			<view class="holder2">
-				<view @tap="switchPage" id="pic3" class="pic"
+				<view @tap="switchPage" id="pic4" class="pic"
 					style="background: url(/static/pic2.jpg);background-size: cover;">
 
 
@@ -52,8 +50,8 @@
 				</view>
 			</view>
 		</view>
-		<view class="flex_center" style="width: 100%;height: 100px;background-color: yellow;">
-			<view style="height: 15vw;width: 15vw;background-color: black;border-radius: 50%;"></view>
+		<view class="flex_center" style="width: 100%;height: fit-content;margin-top: 20px;">
+			<image src="/static/photo.png" class="photo"></image>
 		</view>
 	</view>
 </template>
@@ -95,7 +93,8 @@
 
 <style>
 	.content {
-		padding: 2%;
+		/* background-color: #dde8e8; */
+		padding: 3%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -105,7 +104,7 @@
 		box-sizing: border-box;
 	}
 
-	/* 	.content::before {
+		.content::before {
 		content: '';
 		background-image: url(/static/backgroud.jpg);
 		background-size: cover;
@@ -116,12 +115,12 @@
 		width: 100%;
 		height: 100%;
 		z-index: -1;
-	} */
+	}
 
 	.swiper {
 		width: 100%;
 		height: 30%;
-		border-radius: 0 0 30rpx 30rpx;
+		border-radius: 30rpx 30rpx 30rpx 30rpx;
 		overflow: hidden;
 		box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
 	}
@@ -136,11 +135,11 @@
 
 	.holder1 {
 		display: flex;
-		justify-content: space-around;
+		justify-content: space-between;
 		align-items: center;
 		width: 100%;
 		height: 25%;
-
+		margin-bottom: 15px;
 	}
 
 	.holder2 {
@@ -149,19 +148,19 @@
 		justify-content: space-around;
 		align-items: center;
 
-		width: 40vw;
-		height: 50vw;
+		width: fit-content;
+		height: 55vw;
 
 	}
 
 	.pic {
-		width: 40vw;
-		height: 40vw;
+		width: 44vw;
+		height: 44vw;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		border-radius: 30rpx;
-		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 	}
 
 	.tag_holder {
@@ -170,5 +169,15 @@
 		border-radius: 30rpx;
 		width: 150rpx;
 		height: 50rpx;
+	}
+
+	.photo {
+		/* background-color: white; */
+		height: 18vw;
+		width: 18vw;
+		/* background-color: black; */
+		/* border-radius: 50%; */
+		/* box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); */
+		border-radius: 50%;
 	}
 </style>
