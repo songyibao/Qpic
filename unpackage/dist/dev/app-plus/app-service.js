@@ -94,8 +94,9 @@ if (uni.restoreGlobal) {
             onClick: _cache[1] || (_cache[1] = (...args) => $options.switchPage && $options.switchPage(...args)),
             id: "pic2",
             class: "pic",
-            style: { "background": "url(/static/pic2.jpg)", "background-size": "cover" }
+            style: { "background": "url(/static/3d.gif)", "background-size": "cover" }
           }),
+          vue.createCommentVNode(' <video src="/static/3d.mp4" autoplay="true" loop="true"></video> '),
           vue.createElementVNode("view", { class: "flex_center tag_holder" }, [
             vue.createElementVNode("text", { style: { "color": "brown" } }, "漫转3D")
           ])
@@ -110,7 +111,7 @@ if (uni.restoreGlobal) {
             onClick: _cache[2] || (_cache[2] = (...args) => $options.switchPage && $options.switchPage(...args)),
             id: "pic3",
             class: "pic",
-            style: { "background": "url(/static/pic2.jpg)", "background-size": "cover" }
+            style: { "background": "url(/static/pic3.png)", "background-size": "cover", "background-color": "white" }
           }),
           vue.createElementVNode("view", { class: "flex_center tag_holder" }, [
             vue.createElementVNode("text", { style: { "color": "brown" } }, "焕新")
@@ -141,7 +142,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "C:/Users/72398/Documents/GitHub/Qpic/pages/index/index.vue"]]);
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "D:/GitHub/Qpic/pages/index/index.vue"]]);
   function formatAppLog(type, filename, ...args) {
     if (uni.__log__) {
       uni.__log__(type, filename, ...args);
@@ -250,7 +251,7 @@ if (uni.restoreGlobal) {
       reject(new Error("not support"));
     });
   }
-  const serverUrl = "http://127.0.0.1:5000";
+  const serverUrl = "http://10.202.255.177:5000";
   const superResolutionUrl = serverUrl + "/uploadImg/1";
   const pic2dUrl = serverUrl + "/uploadImg/2";
   const _sfc_main$4 = {
@@ -330,7 +331,7 @@ if (uni.restoreGlobal) {
       }, "＋ 导入")
     ]);
   }
-  const PagesImport2dImport2d = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "C:/Users/72398/Documents/GitHub/Qpic/pages/import2d/import2d.vue"]]);
+  const PagesImport2dImport2d = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "D:/GitHub/Qpic/pages/import2d/import2d.vue"]]);
   const _sfc_main$3 = {
     data() {
       return {};
@@ -350,7 +351,7 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "button" }, "＋ 导入")
     ]);
   }
-  const PagesImport3dImport3d = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "C:/Users/72398/Documents/GitHub/Qpic/pages/import3d/import3d.vue"]]);
+  const PagesImport3dImport3d = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "D:/GitHub/Qpic/pages/import3d/import3d.vue"]]);
   const _sfc_main$2 = {
     data() {
       return {
@@ -416,7 +417,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesRenewRenew = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "C:/Users/72398/Documents/GitHub/Qpic/pages/renew/renew.vue"]]);
+  const PagesRenewRenew = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "D:/GitHub/Qpic/pages/renew/renew.vue"]]);
   const _sfc_main$1 = {
     data() {
       return {
@@ -494,7 +495,7 @@ if (uni.restoreGlobal) {
       }, "＋ 导入")
     ]);
   }
-  const PagesImportSRImportSR = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "C:/Users/72398/Documents/GitHub/Qpic/pages/importSR/importSR.vue"]]);
+  const PagesImportSRImportSR = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "D:/GitHub/Qpic/pages/importSR/importSR.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
   __definePage("pages/import2d/import2d", PagesImport2dImport2d);
   __definePage("pages/import3d/import3d", PagesImport3dImport3d);
@@ -511,7 +512,7 @@ if (uni.restoreGlobal) {
       formatAppLog("log", "at App.vue:10", "App Hide");
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "C:/Users/72398/Documents/GitHub/Qpic/App.vue"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "D:/GitHub/Qpic/App.vue"]]);
   function createApp() {
     const app = vue.createVueApp(App);
     return {
