@@ -1,33 +1,34 @@
 
 .content {
+		/* background-color: #dde8e8; */
+		/* padding: 3%; */
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: flex-start;
 		width: 100%;
 		height: 100%;
+		box-sizing: border-box;
 }
 .content::before {
 		content: '';
 		background-image: url(../../static/backgroud.jpg);
-		/* 替换成你的背景图片路径 */
 		background-size: cover;
-		/* 根据容器大小调整背景图片尺寸 */
-		filter: blur(20px);
-		/* 调整模糊程度，值可以根据需求调整 */
+		filter: blur(30px);
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
 		z-index: -1;
-		/* 确保 ::before 在内容之后 */
 }
 .swiper {
+		/* margin-top: 3vh; */
 		width: 100%;
 		height: 30%;
 		border-radius: 0 0 0.9375rem 0.9375rem;
 		overflow: hidden;
+		box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
 }
 .swiper-item {
 		width: 100%;
@@ -36,20 +37,34 @@
 		background-color: antiquewhite;
 }
 .holder1 {
+		padding: 0 3vw 0 3vw;
 		display: flex;
-		justify-content: space-around;
+		justify-content: space-between;
 		align-items: center;
 		width: 100%;
 		height: 25%;
+		margin-bottom: 15px;
+		box-sizing: border-box;
+}
+.holder2 {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+
+		width: -webkit-fit-content;
+
+		width: fit-content;
+		height: 55vw;
 }
 .pic {
-		width: 42%;
-		height: 42vw;
+		width: 44vw;
+		height: 44vw;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		border-radius: 0.9375rem;
-		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 }
 .tag_holder {
 		background: white;
@@ -57,6 +72,24 @@
 		border-radius: 0.9375rem;
 		width: 4.6875rem;
 		height: 1.5625rem;
+}
+.photo_holder {
+		width: 21vw;
+		height: 21vw;
+		/* background-color: whitesmoke; */
+		border-radius: 50%;
 		position: relative;
-		top: 1.5625rem;
+		top: 0.09375rem;
+		left: 0.15625rem;
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+.photo {
+		/* background-color: grey; */
+		/* height: 18vw; */
+		width: 21vw;
+		height: 21vw;
+		/* background-color: black; */
+		/* border-radius: 50%; */
+		border-radius: 50%;
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 }

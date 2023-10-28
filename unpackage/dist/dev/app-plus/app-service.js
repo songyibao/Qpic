@@ -69,60 +69,75 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
-      vue.createElementVNode("swiper", {
-        class: "swiper",
-        circular: "",
-        autoplay: true
-      }, [
-        vue.createElementVNode("swiper-item", null, [
-          vue.createElementVNode("image", {
-            src: "/static/swiper1.png",
-            class: "swiper-item",
-            mode: "aspectFill"
-          })
-        ]),
-        vue.createElementVNode("swiper-item", null, [
-          vue.createElementVNode("image", {
-            src: "/static/swiper2.jpg",
-            class: "swiper-item",
-            mode: "aspectFill"
-          })
-        ])
+      vue.createElementVNode("view", { class: "swiper" }, [
+        vue.createElementVNode("image", {
+          src: "/static/swiper1.jpg",
+          class: "swiper-item",
+          mode: "aspectFill"
+        })
       ]),
-      vue.createElementVNode("view", { style: { "height": "5%" } }),
+      vue.createElementVNode("view", { style: { "height": "4vw" } }),
       vue.createElementVNode("view", { class: "holder1" }, [
-        vue.createElementVNode("view", {
-          onClick: _cache[0] || (_cache[0] = (...args) => $options.switchPage && $options.switchPage(...args)),
-          id: "pic1",
-          class: "pic",
-          style: { "background": "url(/static/pic1.jpg)", "background-size": "cover" }
-        }, [
+        vue.createElementVNode("view", { class: "holder2" }, [
+          vue.createElementVNode("view", {
+            onClick: _cache[0] || (_cache[0] = (...args) => $options.switchPage && $options.switchPage(...args)),
+            id: "pic1",
+            class: "pic",
+            style: { "background": "url(/static/pic1.jpg)", "background-size": "cover" }
+          }),
           vue.createElementVNode("view", { class: "flex_center tag_holder" }, [
             vue.createElementVNode("text", { style: { "color": "brown" } }, "漫转2D")
           ])
         ]),
-        vue.createElementVNode("view", {
-          onClick: _cache[1] || (_cache[1] = (...args) => $options.switchPage && $options.switchPage(...args)),
-          id: "pic2",
-          class: "pic",
-          style: { "background": "url(/static/pic2.jpg)", "background-size": "cover" }
-        }, [
+        vue.createElementVNode("view", { class: "holder2" }, [
+          vue.createElementVNode("view", {
+            onClick: _cache[1] || (_cache[1] = (...args) => $options.switchPage && $options.switchPage(...args)),
+            id: "pic2",
+            class: "pic",
+            style: { "background": "url(/static/pic2.jpg)", "background-size": "cover" }
+          }),
           vue.createElementVNode("view", { class: "flex_center tag_holder" }, [
             vue.createElementVNode("text", { style: { "color": "brown" } }, "漫转3D")
           ])
         ])
       ]),
-      vue.createElementVNode("view", { class: "holder1" }, [
-        vue.createElementVNode("view", {
-          onClick: _cache[2] || (_cache[2] = (...args) => $options.switchPage && $options.switchPage(...args)),
-          id: "pic3",
-          class: "pic",
-          style: { "background": "url(/static/pic1.jpg)", "background-size": "cover" }
-        }, [
+      vue.createElementVNode("view", {
+        class: "holder1",
+        style: { "margin-bottom": "10px" }
+      }, [
+        vue.createElementVNode("view", { class: "holder2" }, [
+          vue.createElementVNode("view", {
+            onClick: _cache[2] || (_cache[2] = (...args) => $options.switchPage && $options.switchPage(...args)),
+            id: "pic3",
+            class: "pic",
+            style: { "background": "url(/static/pic2.jpg)", "background-size": "cover" }
+          }),
           vue.createElementVNode("view", { class: "flex_center tag_holder" }, [
-            vue.createElementVNode("text", { style: { "color": "brown" } }, "模糊变清晰")
+            vue.createElementVNode("text", { style: { "color": "brown" } }, "焕新")
+          ])
+        ]),
+        vue.createElementVNode("view", { class: "holder2" }, [
+          vue.createElementVNode("view", {
+            onClick: _cache[3] || (_cache[3] = (...args) => $options.switchPage && $options.switchPage(...args)),
+            id: "pic4",
+            class: "pic",
+            style: { "background": "url(/static/pic1.jpg)", "background-size": "cover" }
+          }),
+          vue.createElementVNode("view", { class: "flex_center tag_holder" }, [
+            vue.createElementVNode("text", { style: { "color": "brown" } }, "焕新")
           ])
         ])
+      ]),
+      vue.createElementVNode("view", {
+        class: "flex_center",
+        style: { "width": "100%", "height": "fit-content" }
+      }, [
+        vue.createCommentVNode(' <view class="flex_center photo_holder"> '),
+        vue.createElementVNode("image", {
+          src: "/static/photo.png",
+          class: "photo"
+        }),
+        vue.createCommentVNode(" </view> ")
       ])
     ]);
   }
@@ -235,7 +250,7 @@ if (uni.restoreGlobal) {
       reject(new Error("not support"));
     });
   }
-  const serverUrl = "http://10.202.221.52:5000";
+  const serverUrl = "http://127.0.0.1:5000";
   const superResolutionUrl = serverUrl + "/uploadImg/1";
   const pic2dUrl = serverUrl + "/uploadImg/2";
   const _sfc_main$4 = {

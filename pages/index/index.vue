@@ -1,10 +1,10 @@
 <template>
 	<view class="content">
 		<view class="swiper">
-				<image src="/static/swiper1.jpg" class="swiper-item" mode="aspectFill"></image>
+			<image src="/static/swiper1.jpg" class="swiper-item" mode="aspectFill"></image>
 
 		</view>
-		<view style="height: 5%;"></view>
+		<view style="height: 4vw;"></view>
 		<view class="holder1">
 
 			<view class="holder2">
@@ -28,7 +28,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="holder1">
+		<view class="holder1" style="margin-bottom: 10px;">
 			<view class="holder2">
 				<view @tap="switchPage" id="pic3" class="pic"
 					style="background: url(/static/pic2.jpg);background-size: cover;">
@@ -41,7 +41,7 @@
 			</view>
 			<view class="holder2">
 				<view @tap="switchPage" id="pic4" class="pic"
-					style="background: url(/static/pic2.jpg);background-size: cover;">
+					style="background: url(/static/pic1.jpg);background-size: cover;">
 
 
 				</view>
@@ -50,8 +50,11 @@
 				</view>
 			</view>
 		</view>
-		<view class="flex_center" style="width: 100%;height: fit-content;margin-top: 20px;">
+		<view class="flex_center" style="width: 100%;height: fit-content;">
+			<!-- <view class="flex_center photo_holder"> -->
 			<image src="/static/photo.png" class="photo"></image>
+			<!-- </view> -->
+
 		</view>
 	</view>
 </template>
@@ -94,7 +97,7 @@
 <style>
 	.content {
 		/* background-color: #dde8e8; */
-		padding: 3%;
+		/* padding: 3%; */
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -104,11 +107,11 @@
 		box-sizing: border-box;
 	}
 
-		.content::before {
+	.content::before {
 		content: '';
 		background-image: url(/static/backgroud.jpg);
 		background-size: cover;
-		filter: blur(20px);
+		filter: blur(30px);
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -118,9 +121,10 @@
 	}
 
 	.swiper {
+		/* margin-top: 3vh; */
 		width: 100%;
 		height: 30%;
-		border-radius: 30rpx 30rpx 30rpx 30rpx;
+		border-radius: 0rpx 0rpx 30rpx 30rpx;
 		overflow: hidden;
 		box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
 	}
@@ -134,12 +138,14 @@
 
 
 	.holder1 {
+		padding: 0 3vw 0 3vw;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
 		height: 25%;
 		margin-bottom: 15px;
+		box-sizing: border-box;
 	}
 
 	.holder2 {
@@ -171,13 +177,25 @@
 		height: 50rpx;
 	}
 
+	.photo_holder {
+		width: 21vw;
+		height: 21vw;
+		/* background-color: whitesmoke; */
+		border-radius: 50%;
+		position: relative;
+		top: 3rpx;
+		left: 5rpx;
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+	}
+
 	.photo {
-		/* background-color: white; */
-		height: 18vw;
-		width: 18vw;
+		/* background-color: grey; */
+		/* height: 18vw; */
+		width: 21vw;
+		height: 21vw;
 		/* background-color: black; */
 		/* border-radius: 50%; */
-		/* box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); */
 		border-radius: 50%;
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 	}
 </style>
