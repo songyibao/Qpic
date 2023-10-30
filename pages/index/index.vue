@@ -1,15 +1,15 @@
  <template>
  	<view class="content">
- 		<view class="swiper">
+ 		<!-- <view class="swiper"> -->
  			<image src="/static/swiper1.jpg" class="swiper-item" mode="aspectFill"></image>
 
- 		</view>
+ 		<!-- </view> -->
  		<view style="height: 4vw;"></view>
  		<view class="holder1">
 
  			<view class="holder2">
  				<view @tap="switchPage" id="pic1" class="pic"
- 					style="background: url(/static/pic1.jpg);background-size: cover;">
+ 					style="background: url(/static/2d.jpg);background-size: cover">
 
 
  				</view>
@@ -37,17 +37,17 @@
 
  				</view>
  				<view class="flex_center tag_holder">
- 					<text style="color: brown;">焕新</text>
+ 					<text style="color: brown;">图像焕新</text>
  				</view>
  			</view>
  			<view class="holder2">
  				<view @tap="switchPage" id="pic4" class="pic"
- 					style="background: url(/static/pic1.jpg);background-size: cover;">
+ 					style="background: url(/static/style.jpg);background-size: cover;">
 
 
  				</view>
  				<view class="flex_center tag_holder">
- 					<text style="color: brown;">焕新</text>
+ 					<text style="color: brown;">风格迁移</text>
  				</view>
  			</view>
  		</view>
@@ -72,6 +72,7 @@
  		},
  		methods: {
  			switchPage: function(e) {
+				console.log(e.currentTarget.id)
  				switch (e.currentTarget.id) {
  					case "pic1":
  						uni.navigateTo({
@@ -87,6 +88,12 @@
  						uni.navigateTo({
  							url: "/pages/importSR/importSR"
  						})
+						break;
+					case "pic4":
+						uni.navigateTo({
+							url: "/pages/importStyle/importStyle"
+						})
+						break;
  					default:
  						break;
  				}
@@ -132,9 +139,11 @@
 
  	.swiper-item {
  		width: 100%;
- 		height: 100%;
- 		text-align: center;
- 		background-color: antiquewhite;
+ 		height: 30%;
+ 		/* text-align: center; */
+ 		/* background-color: antiquewhite; */
+		border-radius: 0rpx 0rpx 30rpx 30rpx;
+		box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
  	}
 
 

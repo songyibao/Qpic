@@ -42,6 +42,14 @@
                 "enablePullDownRefresh": false
             }
             
+        },
+        {
+        	"path" : "pages/importStyle/importStyle",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "",
+        		"enablePullDownRefresh" : false
+        	}
         }
     ],
 	"globalStyle": {

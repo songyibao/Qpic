@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<view class="pic" style="background: url(/static/pic1.jpg);background-size: cover;">
+		<view class="pic" style="background: url(/static/pic3.png);background-size: cover;background-color: lightblue">
 			<view class="flex_center tag_holder">
 				<text style="color: brown;font-size: 45rpx">模糊变清晰</text>
 			</view>
@@ -41,7 +41,7 @@
 			uploadImage: function(tempFilePaths) {
 				var self = this
 				uni.showLoading({
-					title: "图片上传中"
+					title: "处理中"
 				})
 				uni.uploadFile({
 					url: url,
@@ -91,22 +91,18 @@
 		height: 100%;
 	}
 
-	.content::before {
+/* 	.content::before {
 		content: '';
 		background-image: url(/static/backgroud.jpg);
-		/* 替换成你的背景图片路径 */
 		background-size: cover;
-		/* 根据容器大小调整背景图片尺寸 */
 		filter: blur(20px);
-		/* 调整模糊程度，值可以根据需求调整 */
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
 		z-index: -1;
-		/* 确保 ::before 在内容之后 */
-	}
+	} */
 
 	.pic {
 		width: 80%;
@@ -115,7 +111,7 @@
 		justify-content: center;
 		align-items: center;
 		border-radius: 30rpx;
-		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 	}
 
 	.tag_holder {
