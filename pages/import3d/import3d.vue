@@ -16,6 +16,19 @@
 
 			}
 		},
+		onLoad(e) {
+			if (e.hasOwnProperty('url')) {
+				this.pass = true
+				this.tempFilePaths.push(e.url)
+			}
+		},
+		onReady(e) {
+		
+			if (this.pass) {
+				this.uploadImage(this.tempFilePaths)
+			}
+		
+		},
 		methods: {
 
 		}

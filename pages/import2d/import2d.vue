@@ -20,9 +20,26 @@
 	export default {
 		data() {
 			return {
+				pass: false,
 				tempFilePaths: [],
 				res_image_base64: {}
 			}
+		},
+		onLoad(e) {
+			console.log(e)
+			if (e.hasOwnProperty('url')) {
+				this.pass = true
+				this.tempFilePaths.push(e.url)
+			}
+
+		},
+		onReady(e) {
+			
+			if (this.pass) {
+				console.log("开始上传")
+				this.uploadImage(this.tempFilePaths)
+			}
+
 		},
 		methods: {
 			chooseImage: function() {
@@ -34,6 +51,7 @@
 					success: function(res) {
 						console.log(res.tempFilePaths[0])
 						// self.tempFilePaths = res.tempFilePaths
+						console.log("文件url列表", res.tempFilePaths)
 						self.uploadImage(res.tempFilePaths)
 					}
 				});
@@ -43,6 +61,7 @@
 				uni.showLoading({
 					title: "图片上传中"
 				})
+
 				uni.uploadFile({
 					url: url,
 					filePath: tempFilePaths[0],
@@ -62,7 +81,7 @@
 								urls.push(path)
 								uni.previewImage({
 									urls: urls,
-									indicator: "none",
+									indicator: "none"
 
 								})
 
@@ -91,7 +110,7 @@
 		height: 100%;
 	}
 
-/* 	.content::before {
+	/* 	.content::before {
 		content: '';
 		background-image: url(/static/backgroud.jpg);
 		background-size: cover;

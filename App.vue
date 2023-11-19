@@ -18,7 +18,8 @@
 	#app {
 		height: 100%;
 	}
-	.flex_center{
+
+	.flex_center {
 		display: flex;
 		justify-content: center;
 		align-items: center;

@@ -20,9 +20,25 @@
 	export default {
 		data() {
 			return {
+				pass:false,
 				tempFilePaths: [],
 				res_image_base64: {}
 			}
+		},
+		onLoad(e) {
+			console.log(e)
+			if (e.hasOwnProperty('url')) {
+				this.pass = true
+				this.tempFilePaths.push(e.url)
+			}
+
+		},
+		onReady(e) {
+
+			if (this.pass) {
+				this.uploadImage(this.tempFilePaths)
+			}
+
 		},
 		methods: {
 			chooseImage: function() {

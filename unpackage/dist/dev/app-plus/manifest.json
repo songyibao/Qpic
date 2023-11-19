@@ -17,6 +17,7 @@
     "url": ""
   },
   "permissions": {
+    "Camera": {},
     "UniNView": {
       "description": "UniNView原生渲染"
     }
@@ -120,7 +121,7 @@
     "uni-app": {
       "control": "uni-v3",
       "vueVersion": "3",
-      "compilerVersion": "3.95",
+      "compilerVersion": "3.96",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
       "nvue": {

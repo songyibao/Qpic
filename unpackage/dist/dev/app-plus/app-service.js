@@ -78,6 +78,73 @@ if (uni.restoreGlobal) {
             });
             break;
         }
+      },
+      getImage: function(e) {
+        var self = this;
+        var cmr = plus.camera.getCamera();
+        cmr.captureImage(function(p) {
+          plus.io.resolveLocalFileSystemURL(p, function(entry) {
+            var imgURL = entry.toLocalURL();
+            self.compressImage(imgURL).then(function(compressedPath) {
+              formatAppLog("log", "at pages/index/index.vue:109", "图片压缩成功，路径为：", compressedPath);
+              uni.showActionSheet({
+                itemList: ["动漫风格", "景深效果", "清晰度增强"],
+                success: function(res) {
+                  switch (res.tapIndex) {
+                    case 0:
+                      uni.navigateTo({
+                        url: "/pages/import2d/import2d?url=" + compressedPath
+                      });
+                      break;
+                    case 1:
+                      uni.navigateTo({
+                        url: "/pages/import3d/import3d?url=" + compressedPath
+                      });
+                      break;
+                    case 2:
+                      uni.navigateTo({
+                        url: "/pages/importSR/importSR?url=" + compressedPath
+                      });
+                      break;
+                  }
+                },
+                fail: function(res) {
+                  formatAppLog("log", "at pages/index/index.vue:141", res.errMsg);
+                }
+              });
+            }).catch(function(errorMessage) {
+              formatAppLog("error", "at pages/index/index.vue:146", "图片压缩失败：", errorMessage);
+            });
+          }, function(e2) {
+            plus.nativeUI.toast("读取拍照文件错误：" + e2.message);
+          });
+        }, function(e2) {
+        }, {
+          filter: "image"
+        });
+      },
+      // 压缩图片函数
+      compressImage: function(sourcePath) {
+        return new Promise(function(resolve, reject) {
+          var targetPath = plus.io.convertLocalFileSystemURL("_doc/compressed.jpg");
+          var options = {
+            src: sourcePath,
+            // 原始图片路径
+            dst: targetPath,
+            // 压缩后图片路径
+            width: "10%",
+            height: "10%",
+            //quality: 5, // 压缩质量，可调整压缩比例，范围为0-100
+            overwrite: true
+            // 是否覆盖源文件
+          };
+          plus.zip.compressImage(options, function(event) {
+            formatAppLog("log", "at pages/index/index.vue:174", "压缩后", JSON.stringify(event));
+            resolve(event.target);
+          }, function(error) {
+            reject(error.message);
+          });
+        });
       }
     }
   };
@@ -145,7 +212,8 @@ if (uni.restoreGlobal) {
       ]),
       vue.createElementVNode("view", {
         class: "flex_center",
-        style: { "width": "100%", "height": "fit-content" }
+        style: { "width": "100%", "height": "fit-content" },
+        onClick: _cache[4] || (_cache[4] = (...args) => $options.getImage && $options.getImage(...args))
       }, [
         vue.createCommentVNode(' <view class="flex_center photo_holder"> '),
         vue.createElementVNode("image", {
@@ -156,7 +224,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "/Users/songyibao/Documents/GitHub/Qpic/pages/index/index.vue"]]);
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "C:/Users/72398/Documents/GitHub/Qpic/pages/index/index.vue"]]);
   function dataUrlToBase64(str) {
     var array = str.split(",");
     return array[array.length - 1];
@@ -258,16 +326,30 @@ if (uni.restoreGlobal) {
       reject(new Error("not support"));
     });
   }
-  const serverUrl = "http://159.75.122.204:6006";
+  const serverUrl = "http://10.202.221.49:5000";
   const superResolutionUrl = serverUrl + "/uploadImg/1";
   const pic2dUrl = serverUrl + "/uploadImg/2";
   const styleTransferUrl = serverUrl + "/uploadImg/styleTransfer";
   const _sfc_main$5 = {
     data() {
       return {
+        pass: false,
         tempFilePaths: [],
         res_image_base64: {}
       };
+    },
+    onLoad(e) {
+      formatAppLog("log", "at pages/import2d/import2d.vue:29", e);
+      if (e.hasOwnProperty("url")) {
+        this.pass = true;
+        this.tempFilePaths.push(e.url);
+      }
+    },
+    onReady(e) {
+      if (this.pass) {
+        formatAppLog("log", "at pages/import2d/import2d.vue:39", "开始上传");
+        this.uploadImage(this.tempFilePaths);
+      }
     },
     methods: {
       chooseImage: function() {
@@ -280,7 +362,8 @@ if (uni.restoreGlobal) {
           sourceType: ["album", "camera"],
           //从相册选择
           success: function(res) {
-            formatAppLog("log", "at pages/import2d/import2d.vue:35", res.tempFilePaths[0]);
+            formatAppLog("log", "at pages/import2d/import2d.vue:52", res.tempFilePaths[0]);
+            formatAppLog("log", "at pages/import2d/import2d.vue:54", "文件url列表", res.tempFilePaths);
             self.uploadImage(res.tempFilePaths);
           }
         });
@@ -302,7 +385,7 @@ if (uni.restoreGlobal) {
             });
             base64ToPath(self.res_image_base64).then((path) => {
               uni.hideLoading();
-              formatAppLog("log", "at pages/import2d/import2d.vue:60", path);
+              formatAppLog("log", "at pages/import2d/import2d.vue:79", path);
               var urls = [];
               urls.push(path);
               uni.previewImage({
@@ -316,7 +399,7 @@ if (uni.restoreGlobal) {
                 }
               );
             }).catch((error) => {
-              formatAppLog("error", "at pages/import2d/import2d.vue:75", error);
+              formatAppLog("error", "at pages/import2d/import2d.vue:94", error);
             });
           }
         });
@@ -339,10 +422,21 @@ if (uni.restoreGlobal) {
       }, "＋ 导入")
     ]);
   }
-  const PagesImport2dImport2d = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "/Users/songyibao/Documents/GitHub/Qpic/pages/import2d/import2d.vue"]]);
+  const PagesImport2dImport2d = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__file", "C:/Users/72398/Documents/GitHub/Qpic/pages/import2d/import2d.vue"]]);
   const _sfc_main$4 = {
     data() {
       return {};
+    },
+    onLoad(e) {
+      if (e.hasOwnProperty("url")) {
+        this.pass = true;
+        this.tempFilePaths.push(e.url);
+      }
+    },
+    onReady(e) {
+      if (this.pass) {
+        this.uploadImage(this.tempFilePaths);
+      }
     },
     methods: {}
   };
@@ -359,7 +453,7 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("view", { class: "button" }, "＋ 导入")
     ]);
   }
-  const PagesImport3dImport3d = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "/Users/songyibao/Documents/GitHub/Qpic/pages/import3d/import3d.vue"]]);
+  const PagesImport3dImport3d = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "C:/Users/72398/Documents/GitHub/Qpic/pages/import3d/import3d.vue"]]);
   const _sfc_main$3 = {
     data() {
       return {
@@ -425,13 +519,26 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesRenewRenew = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "/Users/songyibao/Documents/GitHub/Qpic/pages/renew/renew.vue"]]);
+  const PagesRenewRenew = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__file", "C:/Users/72398/Documents/GitHub/Qpic/pages/renew/renew.vue"]]);
   const _sfc_main$2 = {
     data() {
       return {
+        pass: false,
         tempFilePaths: [],
         res_image_base64: {}
       };
+    },
+    onLoad(e) {
+      formatAppLog("log", "at pages/importSR/importSR.vue:29", e);
+      if (e.hasOwnProperty("url")) {
+        this.pass = true;
+        this.tempFilePaths.push(e.url);
+      }
+    },
+    onReady(e) {
+      if (this.pass) {
+        this.uploadImage(this.tempFilePaths);
+      }
     },
     methods: {
       chooseImage: function() {
@@ -444,7 +551,7 @@ if (uni.restoreGlobal) {
           sourceType: ["album", "camera"],
           //从相册选择
           success: function(res) {
-            formatAppLog("log", "at pages/importSR/importSR.vue:35", res.tempFilePaths[0]);
+            formatAppLog("log", "at pages/importSR/importSR.vue:51", res.tempFilePaths[0]);
             self.uploadImage(res.tempFilePaths);
           }
         });
@@ -466,7 +573,7 @@ if (uni.restoreGlobal) {
             });
             base64ToPath(self.res_image_base64).then((path) => {
               uni.hideLoading();
-              formatAppLog("log", "at pages/importSR/importSR.vue:60", path);
+              formatAppLog("log", "at pages/importSR/importSR.vue:76", path);
               var urls = [];
               urls.push(path);
               uni.previewImage({
@@ -480,7 +587,7 @@ if (uni.restoreGlobal) {
                 }
               );
             }).catch((error) => {
-              formatAppLog("error", "at pages/importSR/importSR.vue:75", error);
+              formatAppLog("error", "at pages/importSR/importSR.vue:91", error);
             });
           }
         });
@@ -503,7 +610,7 @@ if (uni.restoreGlobal) {
       }, "＋ 导入")
     ]);
   }
-  const PagesImportSRImportSR = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "/Users/songyibao/Documents/GitHub/Qpic/pages/importSR/importSR.vue"]]);
+  const PagesImportSRImportSR = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__file", "C:/Users/72398/Documents/GitHub/Qpic/pages/importSR/importSR.vue"]]);
   const _sfc_main$1 = {
     data() {
       return {
@@ -629,7 +736,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesImportStyleImportStyle = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "/Users/songyibao/Documents/GitHub/Qpic/pages/importStyle/importStyle.vue"]]);
+  const PagesImportStyleImportStyle = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__file", "C:/Users/72398/Documents/GitHub/Qpic/pages/importStyle/importStyle.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
   __definePage("pages/import2d/import2d", PagesImport2dImport2d);
   __definePage("pages/import3d/import3d", PagesImport3dImport3d);
@@ -647,7 +754,7 @@ if (uni.restoreGlobal) {
       formatAppLog("log", "at App.vue:10", "App Hide");
     }
   };
-  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "/Users/songyibao/Documents/GitHub/Qpic/App.vue"]]);
+  const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "C:/Users/72398/Documents/GitHub/Qpic/App.vue"]]);
   function createApp() {
     const app = vue.createVueApp(App);
     return {
