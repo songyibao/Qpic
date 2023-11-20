@@ -14,7 +14,7 @@
 
  				</view>
  				<view class="flex_center tag_holder">
- 					<text style="color: brown;">漫转2D</text>
+ 					<text style="color: brown;">卡通形象</text>
  				</view>
  			</view>
  			<view class="holder2">
@@ -25,7 +25,7 @@
  				</view>
  				<!-- <video src="/static/3d.mp4" autoplay="true" loop="true"></video> -->
  				<view class="flex_center tag_holder">
- 					<text style="color: brown;">漫转3D</text>
+ 					<text style="color: brown;">3D视效</text>
  				</view>
  			</view>
  		</view>
@@ -104,47 +104,48 @@
  				cmr.captureImage(function(p) {
  					plus.io.resolveLocalFileSystemURL(p, function(entry) {
  						var imgURL = entry.toLocalURL()
-						self.compressImage(imgURL)
-						  .then(function(compressedPath) {
-						    console.log('图片压缩成功，路径为：', compressedPath);
-						    // 在这里你可以对压缩后的图片路径进行进一步的操作
-							uni.showActionSheet({
-								itemList: ['动漫风格', '景深效果', '清晰度增强'],
-								success: function(res) {
-									switch (res.tapIndex) {
-										case 0:
-											uni.navigateTo({
-												url: "/pages/import2d/import2d" +
-													"?" + "url=" +
-													compressedPath
-											})
-											break;
-										case 1:
-											uni.navigateTo({
-												url: "/pages/import3d/import3d" +
-													"?" + "url=" +
-													compressedPath
-											})
-											break;
-										case 2:
-											uni.navigateTo({
-												url: "/pages/importSR/importSR" +
-													"?" + "url=" +
-													compressedPath
-											})
-											break;
-										default:
-											break;
-									}
-								},
-								fail: function(res) {
-									console.log(res.errMsg);
-								}
-							});
-						  })
-						  .catch(function(errorMessage) {
-						    console.error('图片压缩失败：', errorMessage);
-						  });
+
+ 						uni.showActionSheet({
+ 							itemList: ['卡通形象', '3D视效', '图像焕新'],
+ 							success: function(res) {
+ 								switch (res.tapIndex) {
+ 									case 0:
+ 										uni.navigateTo({
+ 											url: "/pages/import2d/import2d" +
+ 												"?" + "url=" +
+ 												imgURL
+ 										})
+ 										break;
+ 									case 1:
+ 										uni.navigateTo({
+ 											url: "/pages/import3d/import3d" +
+ 												"?" + "url=" +
+ 												imgURL
+ 										})
+ 										break;
+ 									case 2:
+ 										self.compressImage(imgURL)
+ 											.then(function(compressedPath) {
+												
+ 												uni.navigateTo({
+ 													url: "/pages/importSR/importSR?url=" +
+ 														compressedPath
+ 												})
+ 											})
+ 											.catch(function(errorMessage) {
+												console.log('compress error')
+ 											});
+
+ 										break;
+ 									default:
+ 										break;
+ 								}
+ 							},
+ 							fail: function(res) {
+ 								console.log(res.errMsg);
+ 							}
+ 						});
+
  						// compressImage(entry.toLocalURL(), entry.name);
  					}, function(e) {
  						plus.nativeUI.toast("读取拍照文件错误：" + e.message);
@@ -154,7 +155,7 @@
  				});
  			},
  			// 压缩图片函数
- 			compressImage:function(sourcePath) {
+ 			compressImage: function(sourcePath) {
  				return new Promise(function(resolve, reject) {
  					// 压缩后的图片路径
  					var targetPath = plus.io.convertLocalFileSystemURL("_doc/compressed.jpg");
@@ -163,15 +164,15 @@
  					var options = {
  						src: sourcePath, // 原始图片路径
  						dst: targetPath, // 压缩后图片路径
-						width: '10%',
-						height:'10%',
+ 						width: '20%',
+ 						height: '20%',
  						//quality: 5, // 压缩质量，可调整压缩比例，范围为0-100
  						overwrite: true // 是否覆盖源文件
  					};
 
  					// 调用压缩方法
  					plus.zip.compressImage(options, function(event) {
-						console.log("压缩后",JSON.stringify(event))
+ 						console.log("压缩后", JSON.stringify(event))
  						// 压缩成功，使用 Promise 的 resolve 返回压缩后的图片路径
  						resolve(event.target);
  					}, function(error) {
@@ -197,7 +198,7 @@
  		box-sizing: border-box;
  	}
 
- 	.content::before {
+	.content::before {
  		content: '';
  		background-image: url(/static/backgroud.jpg);
  		background-size: cover;

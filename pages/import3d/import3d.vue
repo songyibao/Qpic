@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="pic" style="background: url(/static/3d.gif);background-size: cover;">
 			<view class="flex_center tag_holder">
-				<text style="color: brown;font-size: 45rpx">漫转3D</text>
+				<text style="color: brown;font-size: 45rpx">3D视效</text>
 			</view>
 		</view>
 		<view class="button">＋ 导入</view>

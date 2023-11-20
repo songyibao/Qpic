@@ -10,13 +10,13 @@
 		<view class="holder1">
 			<view @tap="switchPage" id="pic1" class="pic" style="background: url(/static/pic1.jpg);background-size: cover;">
 				<view class="flex_center tag_holder">
-					<text style="color: brown;">漫转2D</text>
+					<text style="color: brown;">卡通形象</text>
 				</view>
 
 			</view>
 			<view @tap="switchPage" id="pic2" class="pic" style="background: url(/static/pic2.jpg);background-size: cover;">
 				<view class="flex_center tag_holder">
-					<text style="color: brown;">漫转3D</text>
+					<text style="color: brown;">3D视效</text>
 				</view>
 
 			</view>

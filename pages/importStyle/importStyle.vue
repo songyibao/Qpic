@@ -33,7 +33,7 @@
 				var self = this;
 				uni.chooseImage({
 					count: 1, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album', 'camera'], //从相册选择
 					success: function(res) {
 						var newarr = self.tempFilePaths.concat(res.tempFilePaths)
@@ -48,7 +48,7 @@
 				var self = this;
 				uni.chooseImage({
 					count: 1, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album', 'camera'], //从相册选择
 					success: function(res) {
 						var newarr = self.tempFilePaths.concat(res.tempFilePaths)
@@ -66,11 +66,13 @@
 					title: "处理中，请耐心等待"
 				})
 				var files = []
-				tempFilePaths.forEach((item) => {
+				tempFilePaths.forEach((item,index) => {
 					var obj = {}
 					obj.uri = item
+					obj.name = 'file'+index
 					files.push(obj)
 				})
+				console.log(files)
 				uni.uploadFile({
 					url: url,
 					files: files,

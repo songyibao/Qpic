@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="pic" style="background: url(/static/2d.jpg);background-size: cover;">
 			<view class="flex_center tag_holder">
-				<text style="color: brown;font-size: 45rpx">漫转2D</text>
+				<text style="color: brown;font-size: 45rpx">卡通形象</text>
 			</view>
 		</view>
 		<view class="button" @tap="chooseImage">＋ 导入</view>
@@ -46,7 +46,7 @@
 				var self = this;
 				uni.chooseImage({
 					count: 1, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album', 'camera'], //从相册选择
 					success: function(res) {
 						console.log(res.tempFilePaths[0])
