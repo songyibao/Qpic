@@ -6,26 +6,6 @@
 			</bt-cropper>
 		</view>
 		<view class="footer">
-			<!-- 			<scroll-view :scroll-x="true" class="scroller">
-				<view class="scrollerContainer">
-					<view @click="ratio=0" class="item" :class="{
-						active: ratio==0
-					}">
-						<view class="itemContent ratio-1-1">
-							自由
-						</view>
-					</view>
-					<view v-for="(item,index) in ratioList" :key="index" @click="chooseRatio(index)" class="item"
-						:class="{
-						active:activeIndex===index && ratio!==0
-					}">
-						<view :class="'itemContent ratio-' + item.width + '-' + item.height">
-							{{item.width}}:{{item.height}}
-						</view>
-					</view>
-
-				</view>
-			</scroll-view> -->
 			<view style="color: white;width: 100vw;display: flex;justify-content: center;">
 				<view>为了较好的效果，请框选人脸部分</view>
 			</view>
@@ -44,8 +24,11 @@
 
 <script>
 	import {
-		faceRestoreUrl as url
-	} from '/config.js'
+		base64ToPath
+	} from '../../js_sdk/mmmm-image-tools/index.js'
+	import {
+		faceColorUrl as url
+	} from '../../config.js'
 	export default {
 		data() {
 			return {

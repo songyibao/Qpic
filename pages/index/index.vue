@@ -1,10 +1,7 @@
  <template>
  	<view class="content">
- 		<!-- <view class="swiper"> -->
- 		<image src="/static/swiper1.jpg" class="swiper-item" mode="aspectFill"></image>
-
- 		<!-- </view> -->
- 		<view style="height: 4vw;"></view>
+ 		<view class="banner"></view>
+ 		<view style="height: 5vw;"></view>
  		<view class="holder1">
 
  			<view class="holder2">
@@ -19,13 +16,12 @@
  			</view>
  			<view class="holder2">
  				<view @tap="switchPage" id="pic2" class="pic"
- 					style="background: url(/static/3d.gif);background-size: cover;">
+ 					style="background: url(/static/style.jpg);background-size: cover;">
 
 
  				</view>
- 				<!-- <video src="/static/3d.mp4" autoplay="true" loop="true"></video> -->
  				<view class="flex_center tag_holder">
- 					<text style="color: brown;">3D视效</text>
+ 					<text style="color: brown;">风格迁移</text>
  				</view>
  			</view>
  		</view>
@@ -42,21 +38,45 @@
  			</view>
  			<view class="holder2">
  				<view @tap="switchPage" id="pic4" class="pic"
- 					style="background: url(/static/style.jpg);background-size: cover;">
+ 					style="background: url(/static/2d.jpg);background-size: cover;">
+
+
+ 				</view>
+ 				<!-- <video src="/static/3d.mp4" autoplay="true" loop="true"></video> -->
+ 				<view class="flex_center tag_holder">
+ 					<text style="color: brown;">人像修复</text>
+ 				</view>
+ 			</view>
+ 		</view>
+
+
+ 		<view class="holder1" style="margin-bottom: 10px;">
+ 			<view class="holder2">
+ 				<view @tap="switchPage" id="pic5" class="pic"
+ 					style="background: url(/static/pic3.png);background-size: cover;background-color: white;  ">
 
 
  				</view>
  				<view class="flex_center tag_holder">
- 					<text style="color: brown;">风格迁移</text>
+ 					<text style="color: brown;">旧照片上色</text>
+ 				</view>
+ 			</view>
+ 			<view class="holder2">
+ 				<view @tap="switchPage" id="pic6" class="pic"
+ 					style="background: url(/static/pic3.png);background-size: cover;">
+
+
+ 				</view>
+ 				<view class="flex_center tag_holder">
+ 					<text style="color: brown;">FaceInpaint</text>
  				</view>
  			</view>
  		</view>
- 		<view class="flex_center" style="width: 100%;height: fit-content;" @tap="getImage">
- 			<!-- <view class="flex_center photo_holder"> -->
- 			<image src="/static/photo.png" class="photo"></image>
- 			<!-- </view> -->
 
- 		</view>
+ 		<!-- 		<view class="flex_center" style="width: 100%;height: fit-content;" @tap="getImage">
+ 			<image src="/static/photo.png" class="photo"></image>
+
+ 		</view> -->
  	</view>
  </template>
 
@@ -79,9 +99,10 @@
  							url: "/pages/import2d/import2d"
  						})
  						break;
+
  					case "pic2":
  						uni.navigateTo({
- 							url: "/pages/import3d/import3d"
+ 							url: "/pages/importStyle/importStyle"
  						})
  						break;
  					case "pic3":
@@ -91,7 +112,17 @@
  						break;
  					case "pic4":
  						uni.navigateTo({
- 							url: "/pages/importStyle/importStyle"
+ 							url: "/pages/importFace/importFace"
+ 						})
+ 						break;
+ 					case "pic5":
+ 						uni.navigateTo({
+ 							url: "/pages/importFaceColor/importFaceColor"
+ 						})
+ 						break;
+ 					case "pic6":
+ 						uni.navigateTo({
+ 							url: "/pages/importFaceInpaint/importFaceInpaint"
  						})
  						break;
  					default:
@@ -126,14 +157,14 @@
  									case 2:
  										self.compressImage(imgURL)
  											.then(function(compressedPath) {
-												
+
  												uni.navigateTo({
  													url: "/pages/importSR/importSR?url=" +
  														compressedPath
  												})
  											})
  											.catch(function(errorMessage) {
-												console.log('compress error')
+ 												console.log('compress error')
  											});
 
  										break;
@@ -198,7 +229,7 @@
  		box-sizing: border-box;
  	}
 
-	.content::before {
+ 	.content::before {
  		content: '';
  		background-image: url(/static/backgroud.jpg);
  		background-size: cover;
@@ -211,10 +242,11 @@
  		z-index: -1;
  	}
 
- 	.swiper {
- 		/* margin-top: 3vh; */
- 		width: 100%;
- 		height: 30%;
+ 	.banner {
+ 		background-image: url(/static/swiper1.jpg);
+ 		background-size: cover;
+ 		width: 100vw;
+ 		height: 30vh;
  		border-radius: 0rpx 0rpx 30rpx 30rpx;
  		overflow: hidden;
  		box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);

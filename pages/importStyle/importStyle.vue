@@ -17,10 +17,10 @@
 	// 以下路径需根据项目实际情况填写
 	import {
 		base64ToPath
-	} from '/js_sdk/mmmm-image-tools/index.js'
+	} from '../../js_sdk/mmmm-image-tools/index.js'
 	import {
 		styleTransferUrl as url
-	} from '/config.js'
+	} from '../../config.js'
 	export default {
 		data() {
 			return {
