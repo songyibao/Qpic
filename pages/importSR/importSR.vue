@@ -98,6 +98,9 @@
 </script>
 
 <style>
+	page{
+		height: 100vh;
+	}
 	.content {
 		display: flex;
 		flex-direction: column;

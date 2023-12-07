@@ -38,13 +38,13 @@
  			</view>
  			<view class="holder2">
  				<view @tap="switchPage" id="pic4" class="pic"
- 					style="background: url(/static/2d.jpg);background-size: cover;">
+ 					style="background: url(/static/face.png);background-size: cover;">
 
 
  				</view>
  				<!-- <video src="/static/3d.mp4" autoplay="true" loop="true"></video> -->
  				<view class="flex_center tag_holder">
- 					<text style="color: brown;">人像修复</text>
+ 					<text style="color: brown;">人像修复/去码</text>
  				</view>
  			</view>
  		</view>
@@ -53,27 +53,41 @@
  		<view class="holder1" style="margin-bottom: 10px;">
  			<view class="holder2">
  				<view @tap="switchPage" id="pic5" class="pic"
- 					style="background: url(/static/pic3.png);background-size: cover;background-color: white;  ">
+ 					style="background: url(/static/color.jpg);background-size: cover;background-color: white;  ">
 
 
  				</view>
  				<view class="flex_center tag_holder">
- 					<text style="color: brown;">旧照片上色</text>
+ 					<text style="color: brown;">AI智能上色</text>
  				</view>
  			</view>
- 			<view class="holder2">
- 				<view @tap="switchPage" id="pic6" class="pic"
- 					style="background: url(/static/pic3.png);background-size: cover;">
+			<view class="holder2">
+				<view class="pic"
+					style="background: url(/static/coding.png);background-size: cover;background-color: white;  ">
+			
+			
+				</view>
+				<view class="flex_center tag_holder">
+					<text style="color: brown;">更多功能开发中</text>
+				</view>
+			</view>
+<!-- 			<view class="holder2">
+				<view @tap="getImage" id="pic5" class="pic"
+					style="background: url(/static/photo.png);background-size: cover;border-radius: 50%;">
+			
+			
+				</view>
+				<view class="flex_center tag_holder">
+					<text style="color: brown;">拍摄照片</text>
+				</view>
+			</view> -->
+<!-- 		<view class="flex_center" style="width: 100%;height: fit-content;" @tap="getImage">
+ 			<image src="/static/photo.png" class="photo"></image>
 
-
- 				</view>
- 				<view class="flex_center tag_holder">
- 					<text style="color: brown;">FaceInpaint</text>
- 				</view>
- 			</view>
+ 		</view> -->
  		</view>
 
- 		<!-- 		<view class="flex_center" style="width: 100%;height: fit-content;" @tap="getImage">
+<!-- 		<view class="flex_center" style="width: 100%;height: fit-content;" @tap="getImage">
  			<image src="/static/photo.png" class="photo"></image>
 
  		</view> -->
@@ -120,11 +134,6 @@
  							url: "/pages/importFaceColor/importFaceColor"
  						})
  						break;
- 					case "pic6":
- 						uni.navigateTo({
- 							url: "/pages/importFaceInpaint/importFaceInpaint"
- 						})
- 						break;
  					default:
  						break;
  				}
@@ -137,7 +146,7 @@
  						var imgURL = entry.toLocalURL()
 
  						uni.showActionSheet({
- 							itemList: ['卡通形象', '3D视效', '图像焕新'],
+ 							itemList: ['卡通形象', '图像焕新'],
  							success: function(res) {
  								switch (res.tapIndex) {
  									case 0:
@@ -148,13 +157,6 @@
  										})
  										break;
  									case 1:
- 										uni.navigateTo({
- 											url: "/pages/import3d/import3d" +
- 												"?" + "url=" +
- 												imgURL
- 										})
- 										break;
- 									case 2:
  										self.compressImage(imgURL)
  											.then(function(compressedPath) {
 
@@ -246,8 +248,8 @@
  		background-image: url(/static/swiper1.jpg);
  		background-size: cover;
  		width: 100vw;
- 		height: 30vh;
- 		border-radius: 0rpx 0rpx 30rpx 30rpx;
+ 		height: 18vh;
+ 		/* border-radius: 0rpx 0rpx 30rpx 30rpx; */
  		overflow: hidden;
  		box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
  	}
@@ -298,7 +300,7 @@
  		background: white;
  		opacity: 0.75;
  		border-radius: 30rpx;
- 		width: 150rpx;
+ 		width: 250rpx;
  		height: 50rpx;
  	}
 

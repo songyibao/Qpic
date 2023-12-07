@@ -101,6 +101,9 @@
 </script>
 
 <style>
+	page{
+		height: 100vh;
+	}
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -109,7 +112,6 @@
 		width: 100%;
 		height: 100%;
 	}
-
 	/* 	.content::before {
 		content: '';
 		background-image: url(/static/backgroud.jpg);

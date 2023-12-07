@@ -1,28 +1,16 @@
 <template>
-	<view class="container">
-		<view class="cropper">
-			<bt-cropper v-if="imageSrc" ref="croper" :ratio="ratio" :dWidth="400" :rotate="rotate" fileType="png"
-				showGrid @change="onChange" :imageSrc="imageSrc" :mask="mask" :fileType="png">
-			</bt-cropper>
-		</view>
-		<view class="footer">
-			<view style="color: white;width: 100vw;display: flex;justify-content: center;">
-				<view>为了较好的效果，请框选人脸部分</view>
+	<view class="content">
+		<view class="pic" style="background: url(/static/color.jpg);background-size: cover;">
+			<view class="flex_center tag_holder">
+				<text style="color: brown;font-size: 45rpx">智能上色</text>
 			</view>
-			<view class="btnGroup">
-				<view class="btn choose" @click="chooseImage">
-					选择图片
-				</view>
-				<view class="btn" @click="onCrop">
-					开始处理
-				</view>
-			</view>
-			<slider @changing="onRotate"></slider>
 		</view>
+		<view class="button" @tap="chooseImage">＋ 导入</view>
 	</view>
 </template>
 
 <script>
+	// 以下路径需根据项目实际情况填写
 	import {
 		base64ToPath
 	} from '../../js_sdk/mmmm-image-tools/index.js'
@@ -32,80 +20,48 @@
 	export default {
 		data() {
 			return {
-				imageSrc: "",
-				// 蒙版，非黑色区域会裁剪为透明
-				// mask: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a3b890b4-7cb2-4b29-aa78-e652572bdef6/d6bc69ee-cdc0-4a13-a744-d79db42e0dbe.png",
-				mask: "",
-				dWidth: 500,
-				rotate: 0,
-				// 输出的宽高比例
-				// ratio: 3 / 2,
-				ratio: 1 / 1,
-				activeIndex: 0,
-				ratioList: [{
-					width: 1,
-					height: 1,
-				}, {
-					width: 16,
-					height: 9,
-				}, {
-					width: 9,
-					height: 16,
-				}, {
-					width: 4,
-					height: 3,
-				}, {
-					width: 3,
-					height: 4,
-				}, {
-					width: 3,
-					height: 2,
-				}, {
-					width: 2,
-					height: 3,
-				}]
+				pass: false,
+				tempFilePaths: [],
+				res_image_base64: {}
 			}
 		},
-		onLoad(options) {
-			this.imageSrc = decodeURIComponent(options.src)
+		onLoad(e) {
+			console.log(e)
+			if (e.hasOwnProperty('url')) {
+				this.pass = true
+				this.tempFilePaths.push(e.url)
+			}
+
 		},
-		mounted() {},
+		onReady(e) {
+			
+			if (this.pass) {
+				console.log("开始上传")
+				this.uploadImage(this.tempFilePaths)
+			}
+
+		},
 		methods: {
-			onChange(ev) {
-				console.log(ev)
-			},
-			chooseRatio(index) {
-				this.activeIndex = index
-				let item = this.ratioList[index]
-				this.ratio = item.width / item.height
-			},
-			chooseImage() {
+			chooseImage: function() {
+				var self = this;
 				uni.chooseImage({
-					count: 1,
-					sizeType: ['original'],
-					success: (res) => {
-						let tempFilePaths = res.tempFilePaths[0]
-						this.imageSrc = tempFilePaths
-						console.log(this.imageSrc)
+					count: 1, //默认9
+					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album', 'camera'], //从相册选择
+					success: function(res) {
+						console.log(res.tempFilePaths[0])
+						// self.tempFilePaths = res.tempFilePaths
+						console.log("文件url列表", res.tempFilePaths)
+						self.uploadImage(res.tempFilePaths)
 					}
-				})
-			},
-			onCrop(cb) {
-				var self = this
-				this.$refs.croper.crop().then(path => {
-					console.log(path)
-					self.uploadImage([path])
-				})
-			},
-			onRotate(ev) {
-				this.rotate = 360 * (ev.detail.value / 100)
+				});
 			},
 			uploadImage: function(tempFilePaths) {
 				var self = this
 				uni.showLoading({
 					title: "图片上传中"
 				})
-				console.log(tempFilePaths)
+
 				uni.uploadFile({
 					url: url,
 					filePath: tempFilePaths[0],
@@ -140,136 +96,64 @@
 					}
 				});
 			}
-		},
+		}
 	}
 </script>
 
-<style lang="scss" scoped>
-	.container {
-		box-sizing: border-box;
+<style>
+	page{
+		height: 100vh;
+	}
+	.content {
 		display: flex;
 		flex-direction: column;
-		// #ifndef H5
-		height: 100vh;
-		// #endif
-		// #ifdef H5
-		height: 100%;
-		// #endif
-		background-color: #000;
-
-		.cropper {
-			flex: 1;
-		}
-	}
-
-	uni-page-body {
+		align-items: center;
+		justify-content: space-around;
+		width: 100%;
 		height: 100%;
 	}
+	/* 	.content::before {
+		content: '';
+		background-image: url(/static/backgroud.jpg);
+		background-size: cover;
+		filter: blur(20px);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+	} */
 
-	.footer {
-		.scroller {
-			// align-items: center;
-			width: 100vw;
-			height: 100rpx;
-			touch-action: none;
+	.pic {
+		width: 80%;
+		height: 80vw;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 30rpx;
+		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+	}
 
-			.scrollerContainer {
-				display: flex;
-				flex-wrap: nowrap;
-				height: 100rpx;
-				align-items: center;
-			}
+	.tag_holder {
+		background: white;
+		opacity: 0.75;
+		border-radius: 60rpx;
+		width: 300rpx;
+		height: 100rpx;
+		position: relative;
+		top: 50rpx;
+	}
 
-			.item {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				margin-left: 40rpx;
-				width: 70rpx;
-				height: 70rpx;
-				flex-shrink: 0;
-				color: #FFFFFF;
-
-				&.active {
-					color: #0070F3;
-
-					.itemContent {
-						border: 1px solid #0070F3;
-					}
-				}
-
-				.itemContent {
-					border-radius: 10rpx;
-					padding: 10rpx;
-					border: 1px solid #FFFFFF;
-					font-size: 16rpx;
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					white-space: nowrap;
-				}
-
-				.ratio-1-1 {
-					width: 70%;
-					height: 70%;
-				}
-
-				.ratio-16-9 {
-					width: 100%;
-					height: 56.25%;
-				}
-
-				.ratio-9-16 {
-					width: 56.25%;
-					height: 100%;
-				}
-
-				.ratio-4-3 {
-					width: 100%;
-					height: 75%;
-				}
-
-				.ratio-3-4 {
-					width: 75%;
-					height: 100%;
-				}
-
-				.ratio-3-2 {
-					width: 100%;
-					height: 66.6%;
-				}
-
-				.ratio-2-3 {
-					width: 66.6%;
-					height: 100%;
-				}
-			}
-		}
-
-		.btnGroup {
-			display: flex;
-			align-items: center;
-			justify-content: space-around;
-			background-color: #000000;
-			height: calc(100rpx + env(safe-area-inset-bottom));
-			padding-bottom: 20rpx;
-			padding-top: 20rpx;
-			width: 100%;
-
-			.btn {
-				width: 300rpx;
-				background-color: #007AFF;
-				color: #FFFFFF;
-				border-radius: 99px;
-				text-align: center;
-				color: #FFFFFF;
-				line-height: 70rpx;
-
-				&.choose {
-					margin-right: 20rpx;
-					background-color: #F0AD4E;
-				}
-			}
-		}
+	.button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: rgb(164, 126, 121);
+		width: 80%;
+		height: 20%;
+		border-radius: 100rpx;
+		font-size: 80rpx;
+		color: white;
 	}
 </style>
